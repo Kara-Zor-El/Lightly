@@ -29,9 +29,9 @@
 #include <QPainter>
 #include <QtMath>
 
-#if LIGHTLY_HAVE_X11
-#include <QX11Info>
-#endif
+/* #if LIGHTLY_HAVE_X11 */
+/* #include <QX11Info> */
+/* #endif */
 
 #include <algorithm>
 
@@ -416,7 +416,8 @@ namespace Lightly
 
         QPalette copy( source );
 
-        const QList<QPalette::ColorRole> roles = { QPalette::Background, QPalette::Highlight, QPalette::WindowText, QPalette::ButtonText, QPalette::Text, QPalette::Button };
+        const QList<QPalette::ColorRole> roles = { QPalette::Highlight, QPalette::WindowText, QPalette::ButtonText, QPalette::Text, QPalette::Button };
+        /* const QList<QPalette::ColorRole> roles = { QPalette::Background, QPalette::Highlight, QPalette::WindowText, QPalette::ButtonText, QPalette::Text, QPalette::Button }; */
         foreach( const QPalette::ColorRole& role, roles )
         { copy.setColor( role, KColorUtils::mix( source.color( QPalette::Active, role ), source.color( QPalette::Disabled, role ), 1.0-ratio ) ); }
 
@@ -1777,10 +1778,10 @@ namespace Lightly
     //______________________________________________________________________________
     bool Helper::isX11()
     {
-        #if LIGHTLY_HAVE_X11
-        static const bool s_isX11 = KWindowSystem::isPlatformX11();
-        return s_isX11;
-        #endif
+        /* #if LIGHTLY_HAVE_X11 */
+        /* static const bool s_isX11 = KWindowSystem::isPlatformX11(); */
+        /* return s_isX11; */
+        /* #endif */
 
         return false;
 
@@ -1881,10 +1882,10 @@ namespace Lightly
     bool Helper::compositingActive() const
     {
 
-        #if LIGHTLY_HAVE_X11
-        if( isX11() )
-        { return QX11Info::isCompositingManagerRunning( QX11Info::appScreen() ); }
-        #endif
+        /* #if LIGHTLY_HAVE_X11 */
+        /* if( isX11() ) */
+        /* { return QX11Info::isCompositingManagerRunning( QX11Info::appScreen() ); } */
+        /* #endif */
 
         // use KWindowSystem
         return KWindowSystem::compositingActive();

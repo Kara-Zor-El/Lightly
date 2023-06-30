@@ -155,7 +155,11 @@ namespace LightlyPrivate
 
     //_______________________________________________________________
     bool isProgressBarHorizontal( const QStyleOptionProgressBar* option )
-    {  return option && ( (option->state & QStyle::State_Horizontal ) || option->orientation == Qt::Horizontal ); }
+    {
+        return option && (option->state & QStyle::State_Horizontal );
+    }
+            /* {  return option && ( (option->state & QStyle::State_Horizontal ) || option->orientation == Qt::Horizontal ); } */
+
     
     //* list of possible valid toolbars to be translucent
     //* only one can be at time
@@ -197,7 +201,6 @@ namespace Lightly
             QStringLiteral( "org.kde.Lightly.Style" ),
             QStringLiteral( "reparseConfiguration" ), this, SLOT(configurationChanged()) );
         #if QT_VERSION < 0x050F00 // Check if Qt version < 5.15
-        /* #if QT_VERSION < 0x050D00 // Check if Qt version < 5.13 */
         this->addEventFilter(qApp);
         #else
         connect(qApp, &QApplication::paletteChanged, this, &Style::configurationChanged);
@@ -1005,7 +1008,7 @@ namespace Lightly
             case PE_IndicatorToolBarHandle: fcn = &Style::drawIndicatorToolBarHandlePrimitive; break;
             case PE_IndicatorToolBarSeparator: fcn = &Style::drawIndicatorToolBarSeparatorPrimitive; break;
             case PE_IndicatorBranch: fcn = &Style::drawIndicatorBranchPrimitive; break;
-            case PE_FrameStatusBar: fcn = &Style::emptyPrimitive; break;
+            case PE_FrameStatusBarItem: fcn = &Style::emptyPrimitive; break;
             case PE_Frame: fcn = &Style::drawFramePrimitive; break;
             case PE_FrameLineEdit: fcn = &Style::drawFrameLineEditPrimitive; break;
             case PE_FrameMenu: fcn = &Style::drawFrameMenuPrimitive; break;
@@ -1473,9 +1476,9 @@ namespace Lightly
             {
                 _helper->renderMenuFrame( &painter, rect, background, outline, false );
 
-            } else if( StyleConfigData::dockWidgetDrawFrame() || (dockWidget->features()&QDockWidget::AllDockWidgetFeatures) ) {
+            /* } else if( StyleConfigData::dockWidgetDrawFrame() || (dockWidget->features()&QDockWidget::AllDockWidgetFeatures) ) { */
     
-                _helper->renderFrame( &painter, rect, background, palette, windowActive );
+                /* _helper->renderFrame( &painter, rect, background, palette, windowActive ); */
 
             } else {
                 
@@ -8161,7 +8164,7 @@ namespace Lightly
     // Taken from Kvantum
     /*
         To make Qt windows translucent, we should set the surface format of
-        their native handles BEFORE they're created but Qt5 windows are
+        their native handles BEFORE they're created but Qt6 windows are
         often polished AFTER they're created, so that setting the attribute
         "WA_TranslucentBackground" in "Style::polish()" would have no effect.
 

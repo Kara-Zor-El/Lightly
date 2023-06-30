@@ -1,5 +1,12 @@
+add_compile_definitions(QT_DISABLE_DEPRECATED_UP_TO=0x050F00)
+set(CMAKE_MAKE_PROGRAM qmake6)
+set(CMAKE_PREFIX_PATH "/usr/lib64/qt6")
+set(QT_MINIMUM_VERSION "6.3.0")
+find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_SOURCE_DIR}/cmake)
 ################# Qt/KDE #################
-find_package(Qt5 REQUIRED CONFIG COMPONENTS Widgets DBus)
+
+find_package(Qt6 REQUIRED CONFIG COMPONENTS Core Widgets DBus Gui)
 find_package(KF5 REQUIRED COMPONENTS
     I18n
     Config
@@ -8,9 +15,9 @@ find_package(KF5 REQUIRED COMPONENTS
     ConfigWidgets
     WindowSystem)
 
-find_package(Qt5 COMPONENTS Quick)
-set(LIGHTLY_HAVE_QTQUICK ${Qt5Quick_FOUND})
-
+# find_package(Qt6Qml REQUIRED)
+# find_package(Qt6 COMPONENTS Quick)
+set(LIGHTLY_HAVE_QTQUICK false)
 find_package( KF5FrameworkIntegration CONFIG )
 set_package_properties(KF5FrameworkIntegration PROPERTIES
     DESCRIPTION "KF5 Framework Integration"
@@ -33,9 +40,9 @@ set(LIGHTLY_HAVE_KWAYLAND ${KF5Wayland_FOUND})
 
 if(UNIX AND NOT APPLE)
     set(LIGHTLY_HAVE_X11 ${XCB_XCB_FOUND})
-    if (XCB_XCB_FOUND)
-        find_package(Qt5 REQUIRED CONFIG COMPONENTS X11Extras)
-    endif()
+    # if (XCB_XCB_FOUND)
+    #     find_package(Qt6 REQUIRED CONFIG COMPONENTS X11Extras)
+    # endif()
 else()
     set(LIGHTLY_HAVE_X11 FALSE)
 endif()
@@ -98,12 +105,12 @@ set(lightly_PART_SRCS
 
 kconfig_add_kcfg_files(lightly_PART_SRCS lightlystyleconfigdata.kcfgc)
 add_library(lightly MODULE ${lightly_PART_SRCS})
-target_link_libraries(lightly Qt5::Core Qt5::Gui Qt5::Widgets Qt5::DBus)
+target_link_libraries(lightly Qt6::Core Qt6::Gui Qt6::Widgets Qt6::DBus)
 if( LIGHTLY_HAVE_QTQUICK )
-    target_link_libraries(lightly Qt5::Quick)
+    target_link_libraries(lightly Qt6::Quick)
 endif()
 target_link_libraries(lightly KF5::ConfigCore KF5::ConfigWidgets KF5::GuiAddons KF5::IconThemes KF5::WindowSystem)
-target_link_libraries(lightly lightlycommon5)
+target_link_libraries(lightly lightlycommon6)
 
 if(KF5FrameworkIntegration_FOUND)
     target_link_libraries(lightly KF5::Style)
@@ -117,7 +124,7 @@ endif()
 
 if(LIGHTLY_HAVE_X11)
     target_link_libraries(lightly ${XCB_LIBRARIES})
-    target_link_libraries(lightly Qt5::X11Extras)
+    # target_link_libraries(lightly Qt6::X11Extras)
 endif()
 
 if(LIGHTLY_HAVE_KWAYLAND)

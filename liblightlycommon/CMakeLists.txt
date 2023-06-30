@@ -26,10 +26,10 @@ target_link_libraries(lightlycommon6 PRIVATE
 )
 
 
-# target_link_libraries(lightlycommon6
-#     PUBLIC
-#         Qt6::Core
-#         Qt6::Gui)
+target_link_libraries(lightlycommon6
+    PUBLIC
+        Qt6::Core
+        Qt6::Gui)
 
 set_target_properties(lightlycommon6 PROPERTIES
     VERSION ${PROJECT_VERSION}
