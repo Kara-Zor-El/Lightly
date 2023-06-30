@@ -1,15 +1,16 @@
 ################# Qt/KDE #################
-find_package(Qt5 REQUIRED CONFIG COMPONENTS Widgets DBus)
+find_package(Qt6 REQUIRED CONFIG COMPONENTS Widgets DBus)
 find_package(KF5 REQUIRED COMPONENTS
     I18n
     Config
     GuiAddons
     IconThemes
-    ConfigWidgets
     WindowSystem)
 
-find_package(Qt5 COMPONENTS Quick)
-set(LIGHTLY_HAVE_QTQUICK ${Qt5Quick_FOUND})
+
+set(Qt6Quick_FOUND TRUE)
+find_package(Qt6 COMPONENTS Quick)
+set(LIGHTLY_HAVE_QTQUICK ${Qt6Quick_FOUND})
 
 find_package( KF5FrameworkIntegration CONFIG )
 set_package_properties(KF5FrameworkIntegration PROPERTIES
@@ -34,7 +35,7 @@ set(LIGHTLY_HAVE_KWAYLAND ${KF5Wayland_FOUND})
 if(UNIX AND NOT APPLE)
     set(LIGHTLY_HAVE_X11 ${XCB_XCB_FOUND})
     if (XCB_XCB_FOUND)
-        find_package(Qt5 REQUIRED CONFIG COMPONENTS X11Extras)
+        # find_package(Qt6 REQUIRED CONFIG COMPONENTS X11Extras)
     endif()
 else()
     set(LIGHTLY_HAVE_X11 FALSE)
@@ -98,15 +99,18 @@ set(lightly_PART_SRCS
 
 kconfig_add_kcfg_files(lightly_PART_SRCS lightlystyleconfigdata.kcfgc)
 add_library(lightly MODULE ${lightly_PART_SRCS})
-target_link_libraries(lightly Qt5::Core Qt5::Gui Qt5::Widgets Qt5::DBus)
+find_package(Qt6 REQUIRED CONFIG COMPONENTS Core Gui Widgets DBus)
+# target_link_libraries(lightly Qt6::Core Qt6::Gui Qt6::Widgets Qt6::DBus)
+# target_link_libraries(lightly Qt6::Core Qt6::Gui Qt6::Widgets Qt6::DBus)
+# target_link_libraries(lightly Qt6::Core Qt6::Gui Qt6::Widgets Qt6::DBus)
 if( LIGHTLY_HAVE_QTQUICK )
-    target_link_libraries(lightly Qt5::Quick)
+    # target_link_libraries(lightly Qt6::Quick)
 endif()
-target_link_libraries(lightly KF5::ConfigCore KF5::ConfigWidgets KF5::GuiAddons KF5::IconThemes KF5::WindowSystem)
-target_link_libraries(lightly lightlycommon5)
+# target_link_libraries(KF5::ConfigCore KF5::GuiAddons KF5::IconThemes KF5::WindowSystem)
+# target_link_libraries(lightly lightlycommon6)
 
 if(KF5FrameworkIntegration_FOUND)
-    target_link_libraries(lightly KF5::Style)
+    # target_link_libraries(lightly KF5::Style)
 endif()
 
 if (WIN32)
@@ -116,8 +120,8 @@ if (WIN32)
 endif()
 
 if(LIGHTLY_HAVE_X11)
-    target_link_libraries(lightly ${XCB_LIBRARIES})
-    target_link_libraries(lightly Qt5::X11Extras)
+    # target_link_libraries(lightly ${XCB_LIBRARIES})
+    # target_link_libraries(lightly Qt6::X11Extras)
 endif()
 
 if(LIGHTLY_HAVE_KWAYLAND)

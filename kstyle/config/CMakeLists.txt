@@ -1,4 +1,5 @@
 ### configuration plugin
+add_compile_definitions(QT_DISABLE_DEPRECATED_UP_TO=0x050F00)
 add_definitions(-DTRANSLATION_DOMAIN=\"lightly_style_config\")
 set(kstyle_lightly_config_PART_SRCS lightlystyleconfig.cpp)
 
@@ -13,8 +14,8 @@ add_library(kstyle_lightly_config MODULE
     ${kstyle_lightly_config_PART_FORMS_HEADERS}
 )
 
-target_link_libraries(kstyle_lightly_config Qt5::Core Qt5::Gui Qt5::Widgets Qt5::DBus)
-target_link_libraries(kstyle_lightly_config KF5::ConfigCore KF5::ConfigWidgets KF5::I18n)
+# target_link_libraries(kstyle_lightly_config Qt6::Core Qt6::Gui Qt6::Widgets Qt6::DBus)
+target_link_libraries(kstyle_lightly_config KF5::I18n)
 install(TARGETS kstyle_lightly_config DESTINATION ${QT_PLUGIN_INSTALL_DIR})
 install(FILES lightlystyleconfig.desktop DESTINATION  ${SERVICES_INSTALL_DIR})
 
@@ -24,15 +25,15 @@ set_package_properties(KF5KCMUtils PROPERTIES
     DESCRIPTION "KF5 KCM utils Framework"
     URL "https://projects.kde.org/projects/frameworks/kcmutils"
     TYPE OPTIONAL
-    PURPOSE "Required for lightly-settings5 application to build")
+    PURPOSE "Required for lightly-settings6 application to build")
 
 if( KF5KCMUtils_FOUND )
     set(lightly_settings_SOURCES main.cpp)
-    add_executable(lightly-settings5 ${lightly_settings_SOURCES} )
-    target_link_libraries(lightly-settings5 Qt5::Core Qt5::Gui Qt5::Widgets )
-    target_link_libraries(lightly-settings5 KF5::I18n KF5::KCMUtils)
+    add_executable(lightly-settings6 ${lightly_settings_SOURCES} )
+    # target_link_libraries(lightly-settings6 Qt6::Core Qt6::Gui Qt6::Widgets )
+    target_link_libraries(lightly-settings6 KF5::I18n KF5::KCMUtils)
 
-    install(TARGETS lightly-settings5 ${INSTALL_TARGETS_DEFAULT_ARGS})
+    install(TARGETS lightly-settings6 ${INSTALL_TARGETS_DEFAULT_ARGS})
 
     # icon
     ecm_install_icons(ICONS sc-apps-lightly-settings.svgz
