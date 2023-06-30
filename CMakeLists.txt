@@ -1,10 +1,13 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.26.4)
 project(lightly)
 set(PROJECT_VERSION "0.43")
-set(PROJECT_VERSION_MAJOR 5)
+set(PROJECT_VERSION_MAJOR 6)
 add_compile_definitions(QT_DISABLE_DEPRECATED_UP_TO=0x050F00)
+set(CMAKE_MAKE_PROGRAM qmake6)
+set(CMAKE_PREFIX_PATH "/usr/lib64/qt6")
 
 set(KF5_MIN_VERSION "5.78.0")
+set(QT_MINIMUM_VERSION "6.3.0")
 
 include(GenerateExportHeader)
 include(WriteBasicConfigVersionFile)

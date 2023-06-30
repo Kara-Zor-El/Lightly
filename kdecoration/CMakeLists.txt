@@ -72,9 +72,9 @@ add_library(lightlydecoration MODULE
 
 target_link_libraries(lightlydecoration
     PUBLIC
-        # Qt6::Core
+        Qt6::Core
         # Qt6::Gui
-        # Qt6::DBus
+        Qt6::DBus
     PRIVATE
         lightlycommon6
         KDecoration2::KDecoration

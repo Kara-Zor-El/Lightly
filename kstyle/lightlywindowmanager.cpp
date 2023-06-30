@@ -84,13 +84,13 @@
 #include <QQuickWindow>
 #endif
 
-#if LIGHTLY_HAVE_X11
-#include <QX11Info>
-#include <xcb/xcb.h>
+/* #if LIGHTLY_HAVE_X11 */
+/* #include <QX11Info> */
+/* #include <xcb/xcb.h> */
 
-#include <NETWM>
+/* #include <NETWM> */
 
-#endif
+/* #endif */
 
 #if LIGHTLY_HAVE_KWAYLAND
 #include <KWayland/Client/connection_thread.h>
@@ -844,25 +844,25 @@ namespace Lightly
     //_______________________________________________________
     void WindowManager::startDragX11( QWindow* window, const QPoint& position )
     {
-        #if LIGHTLY_HAVE_X11
-        // connection
-        auto connection( QX11Info::connection() );
-
-        auto net_connection = connection;
-        const qreal dpiRatio = window->devicePixelRatio();
-        const QPoint origin = window->screen()->geometry().topLeft();
-        const QPoint native = (position - origin) * dpiRatio + origin;
-
-        xcb_ungrab_pointer( connection, XCB_TIME_CURRENT_TIME );
-        NETRootInfo( net_connection, NET::WMMoveResize ).moveResizeRequest(
-            window->winId(), native.x(), native.y(), NET::Move );
-
-        #else
+        /* #if LIGHTLY_HAVE_X11 */
+        /* // connection */
+        /* auto connection( QX11Info::connection() ); */
+        /*  */
+        /* auto net_connection = connection; */
+        /* const qreal dpiRatio = window->devicePixelRatio(); */
+        /* const QPoint origin = window->screen()->geometry().topLeft(); */
+        /* const QPoint native = (position - origin) * dpiRatio + origin; */
+        /*  */
+        /* xcb_ungrab_pointer( connection, XCB_TIME_CURRENT_TIME ); */
+        /* NETRootInfo( net_connection, NET::WMMoveResize ).moveResizeRequest( */
+        /*     window->winId(), native.x(), native.y(), NET::Move ); */
+        /*  */
+        /* #else */
 
         Q_UNUSED( window );
         Q_UNUSED( position );
 
-        #endif
+        /* #endif */
     }
 
     //_______________________________________________________
@@ -897,11 +897,11 @@ namespace Lightly
         }
         #endif
 
-        #if LIGHTLY_HAVE_X11
-        return Helper::isX11();
-        #else
+        /* #if LIGHTLY_HAVE_X11 */
+        /* return Helper::isX11(); */
+        /* #else */
         return false;
-        #endif
+        /* #endif */
 
     }
 
