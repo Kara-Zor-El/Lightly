@@ -1,7 +1,7 @@
 add_definitions(-DTRANSLATION_DOMAIN="lightly_kwin_deco")
 
 find_package(KF5 REQUIRED COMPONENTS CoreAddons GuiAddons ConfigWidgets WindowSystem I18n IconThemes)
-find_package(Qt5 CONFIG REQUIRED COMPONENTS DBus)
+find_package(Qt6 CONFIG REQUIRED COMPONENTS DBus)
 
 ### XCB
 find_package(XCB COMPONENTS XCB)
@@ -16,7 +16,7 @@ if(UNIX AND NOT APPLE)
 
   set(LIGHTLY_HAVE_X11 ${XCB_XCB_FOUND})
   if (XCB_XCB_FOUND)
-    find_package(Qt5 REQUIRED CONFIG COMPONENTS X11Extras)
+    find_package(Qt6 REQUIRED CONFIG COMPONENTS)
   endif()
 
 else()
@@ -41,7 +41,8 @@ set(lightlydecoration_SRCS
     lightlysettingsprovider.cpp
     lightlysizegrip.cpp)
 
-kconfig_add_kcfg_files(lightlydecoration_SRCS lightlysettings.kcfgc)
+### kconfig
+# kconfig_add_kcfg_files(lightlydecoration_SRCS lightlysettings.kcfgc)
 
 ### config classes
 ### they are kept separately because they might move in a separate library in the future
@@ -71,11 +72,11 @@ add_library(lightlydecoration MODULE
 
 target_link_libraries(lightlydecoration
     PUBLIC
-        Qt5::Core
-        Qt5::Gui
-        Qt5::DBus
+        # Qt6::Core
+        # Qt6::Gui
+        # Qt6::DBus
     PRIVATE
-        lightlycommon5
+        lightlycommon6
         KDecoration2::KDecoration
         KF5::ConfigCore
         KF5::CoreAddons
@@ -88,7 +89,7 @@ target_link_libraries(lightlydecoration
 if(LIGHTLY_HAVE_X11)
   target_link_libraries(lightlydecoration
     PUBLIC
-      Qt5::X11Extras
+      # Qt6::X11Extras
       XCB::XCB)
 endif()
 

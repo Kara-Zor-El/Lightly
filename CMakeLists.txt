@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 project(lightly)
 set(PROJECT_VERSION "0.43")
 set(PROJECT_VERSION_MAJOR 5)
+add_compile_definitions(QT_DISABLE_DEPRECATED_UP_TO=0x050F00)
 
 set(KF5_MIN_VERSION "5.78.0")
 
@@ -26,10 +27,12 @@ if(WITH_DECORATIONS)
     add_subdirectory(kdecoration)
 endif()
 
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
+
 add_subdirectory(colors)
 add_subdirectory(liblightlycommon)
 add_subdirectory(kstyle)
-add_subdirectory(misc)
+# add_subdirectory(misc)
 
 
 include(ECMSetupVersion)
@@ -40,11 +43,19 @@ ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX LIGHTLY
 # create a Config.cmake and a ConfigVersion.cmake file and install them
 set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/Lightly")
 
-ecm_configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/LightlyConfig.cmake.in"
-                                  "${CMAKE_CURRENT_BINARY_DIR}/LightlyConfig.cmake"
-                                  PATH_VARS KDE_INSTALL_FULL_DATADIR
-                                  INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
-                                  )
+# ecm_configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/LightlyConfig.cmake.in"
+#                                   "${CMAKE_CURRENT_BINARY_DIR}/LightlyConfig.cmake"
+#                                   PATH_VARS KDE_INSTALL_FULL_DATADIR
+#                                   INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
+#                                   )
+                                  # QT6 equivalent of ecm_configure_package_config_file
+configure_package_config_file(
+  "${CMAKE_CURRENT_SOURCE_DIR}/LightlyConfig.cmake.in"
+  "${CMAKE_CURRENT_BINARY_DIR}/LightlyConfig.cmake"
+  INSTALL_DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+  PATH_VARS KDE_INSTALL_FULL_DATADIR
+)
+
 
 # add clang-format target for all our real source files
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)

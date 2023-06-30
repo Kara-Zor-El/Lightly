@@ -196,7 +196,8 @@ namespace Lightly
             QStringLiteral( "/LightlyDecoration" ),
             QStringLiteral( "org.kde.Lightly.Style" ),
             QStringLiteral( "reparseConfiguration" ), this, SLOT(configurationChanged()) );
-        #if QT_VERSION < 0x050D00 // Check if Qt version < 5.13
+        #if QT_VERSION < 0x050F00 // Check if Qt version < 5.15
+        /* #if QT_VERSION < 0x050D00 // Check if Qt version < 5.13 */
         this->addEventFilter(qApp);
         #else
         connect(qApp, &QApplication::paletteChanged, this, &Style::configurationChanged);
@@ -1170,8 +1171,9 @@ namespace Lightly
         if( auto dockWidget = qobject_cast<QDockWidget*>( object ) ) { return eventFilterDockWidget( dockWidget, event ); }
         else if( auto subWindow = qobject_cast<QMdiSubWindow*>( object ) ) { return eventFilterMdiSubWindow( subWindow, event ); }
         else if( auto commandLinkButton = qobject_cast<QCommandLinkButton*>( object ) ) { return eventFilterCommandLinkButton( commandLinkButton, event ); }
-        #if QT_VERSION < 0x050D00 // Check if Qt version < 5.13
-        else if( object == qApp && event->type() == QEvent::ApplicationPaletteChange ) { configurationChanged(); }
+        #if QT_VERSION < 0x050F00 // Check if Qt version < 5.15
+        else if( object == qApp && event->type() == QEvent::PaletteChange ) { configurationChanged(); }
+        /* else if( object == qApp && event->type() == QEvent::ApplicationPaletteChange ) { configurationChanged(); } */
         #endif
         // cast to QWidget
         QWidget *widget = static_cast<QWidget*>( object );

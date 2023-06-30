@@ -22,9 +22,11 @@
 #include "lightlyboxshadowrenderer.h"
 
 // Qt
+// include the QPainter, QtMath, and qDebug headers
 #include <QPainter>
 #include <QtMath>
 #include <QDebug>
+
 namespace Lightly
 {
 
