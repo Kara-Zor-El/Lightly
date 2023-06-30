@@ -1,0 +1,40 @@
+file(REMOVE_RECURSE
+  "../bin/lightlydecoration.pdb"
+  "../bin/lightlydecoration.so"
+  "CMakeFiles/lightlydecoration_autogen.dir/AutogenUsed.txt"
+  "CMakeFiles/lightlydecoration_autogen.dir/ParseCache.txt"
+  "lightlydecoration_autogen"
+  "CMakeFiles/lightlydecoration.dir/config/lightlyconfigwidget.cpp.o"
+  "CMakeFiles/lightlydecoration.dir/config/lightlyconfigwidget.cpp.o.d"
+  "CMakeFiles/lightlydecoration.dir/config/lightlydetectwidget.cpp.o"
+  "CMakeFiles/lightlydecoration.dir/config/lightlydetectwidget.cpp.o.d"
+  "CMakeFiles/lightlydecoration.dir/config/lightlyexceptiondialog.cpp.o"
+  "CMakeFiles/lightlydecoration.dir/config/lightlyexceptiondialog.cpp.o.d"
+  "CMakeFiles/lightlydecoration.dir/config/lightlyexceptionlistwidget.cpp.o"
+  "CMakeFiles/lightlydecoration.dir/config/lightlyexceptionlistwidget.cpp.o.d"
+  "CMakeFiles/lightlydecoration.dir/config/lightlyexceptionmodel.cpp.o"
+  "CMakeFiles/lightlydecoration.dir/config/lightlyexceptionmodel.cpp.o.d"
+  "CMakeFiles/lightlydecoration.dir/config/lightlyitemmodel.cpp.o"
+  "CMakeFiles/lightlydecoration.dir/config/lightlyitemmodel.cpp.o.d"
+  "CMakeFiles/lightlydecoration.dir/lightlybutton.cpp.o"
+  "CMakeFiles/lightlydecoration.dir/lightlybutton.cpp.o.d"
+  "CMakeFiles/lightlydecoration.dir/lightlydecoration.cpp.o"
+  "CMakeFiles/lightlydecoration.dir/lightlydecoration.cpp.o.d"
+  "CMakeFiles/lightlydecoration.dir/lightlydecoration_autogen/mocs_compilation.cpp.o"
+  "CMakeFiles/lightlydecoration.dir/lightlydecoration_autogen/mocs_compilation.cpp.o.d"
+  "CMakeFiles/lightlydecoration.dir/lightlyexceptionlist.cpp.o"
+  "CMakeFiles/lightlydecoration.dir/lightlyexceptionlist.cpp.o.d"
+  "CMakeFiles/lightlydecoration.dir/lightlysettingsprovider.cpp.o"
+  "CMakeFiles/lightlydecoration.dir/lightlysettingsprovider.cpp.o.d"
+  "CMakeFiles/lightlydecoration.dir/lightlysizegrip.cpp.o"
+  "CMakeFiles/lightlydecoration.dir/lightlysizegrip.cpp.o.d"
+  "ui_lightlyconfigurationui.h"
+  "ui_lightlydetectwidget.h"
+  "ui_lightlyexceptiondialog.h"
+  "ui_lightlyexceptionlistwidget.h"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/lightlydecoration.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
